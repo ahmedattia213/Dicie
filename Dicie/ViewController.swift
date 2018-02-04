@@ -24,11 +24,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
             hitSound = try! AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "diceThrow" , ofType: "wav")!))
-            hitSound.prepareToPlay()
             woahSound = try! AVAudioPlayer(contentsOf : URL.init(fileURLWithPath: Bundle.main.path(forResource: "woah" , ofType: "wav")!))
-            woahSound.prepareToPlay()
             shakeSound = try! AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "diceShake" , ofType: "wav")!))
-            shakeSound.prepareToPlay()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,10 +34,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func rollButtonPressed(_ sender: UIButton) {
+            hitSound.prepareToPlay()
             hitSound.play()
             updateDiceImages()
            
             if diceImageView1.image == #imageLiteral(resourceName: "dice6") && diceImageView2.image == #imageLiteral(resourceName: "dice6") {
+                woahSound.prepareToPlay()
                 woahSound.play()     // lucky
             }
         }
@@ -57,10 +56,13 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         shakeSound.stop()
         updateDiceImages()
+        
+        hitSound.prepareToPlay()
         hitSound.play()
     }
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        shakeSound.prepareToPlay()
         shakeSound.numberOfLoops = -1
         shakeSound.play()
     }
