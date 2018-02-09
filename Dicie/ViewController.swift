@@ -63,7 +63,6 @@ class ViewController: UIViewController {
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         shakeSound.prepareToPlay()
-        shakeSound.numberOfLoops = -1
         shakeSound.play()
     }
     
