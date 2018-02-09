@@ -34,8 +34,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func rollButtonPressed(_ sender: UIButton) {
-            hitSound.prepareToPlay()
-            hitSound.play()
+            prepareAndPlay(audio: hitSound)
             updateDiceImages()
            
             if diceImageView1.image == #imageLiteral(resourceName: "dice6") && diceImageView2.image == #imageLiteral(resourceName: "dice6") {
@@ -56,14 +55,16 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         shakeSound.stop()
         updateDiceImages()
-        
-        hitSound.prepareToPlay()
-        hitSound.play()
+        prepareAndPlay(audio: hitSound)
     }
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
-        shakeSound.prepareToPlay()
-        shakeSound.play()
+        prepareAndPlay(audio: shakeSound)
+    }
+    
+    func prepareAndPlay( audio : AVAudioPlayer ) {
+        audio.prepareToPlay()
+        audio.play()
     }
     
 }
